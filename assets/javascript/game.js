@@ -4,13 +4,15 @@
     // Setting variables to zero -->
     var wins = 0;
     var losses = 0;
-    var guesses = 0;
-    var guessesLeft = 0;
-    var guessesSoFar = 0;
+    // var guesses = 0;
+    var guessesLeft = 9;
+    var userGuesses = [];
 
 
     // Set the computerGuess variable to a random choice
     var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+
+    console.log("computerGuess: ", computerGuess)
 
 
     function countGuessesLeft() {
@@ -18,15 +20,18 @@
     }
 
     function farUserGuesses() {
-      document.querySelector("#letter").innerHTML = "Your Guesses so far: " + letterUser.join(' ');
+      document.querySelector("#letter").innerHTML = "Your Guesses so far: " + userGuesses.join(' ');
     }
 
     // countGuessesLeft();
 
     var restart = function () {
       guessesLeft = 9;
-      letterUser = [];
-      var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+      userGuesses = [];
+      computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+
+      console.log("computerGuess: " + computerGuess, userGuesses)
+
     }
 
 
@@ -37,7 +42,7 @@
 
       var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
 
-      letterUser.push(userGuess);
+      userGuesses.push(userGuess);
       countGuessesLeft();
       farUserGuesses();
 
@@ -48,7 +53,7 @@
       }
       else if (guessesLeft === 0) {
         losses++;
-        document.querySelector("#lose").innerHTML = "Loses: " + losses;
+        document.querySelector("#losses").innerHTML = "Losses: " + losses;
         restart();
       }
     };
